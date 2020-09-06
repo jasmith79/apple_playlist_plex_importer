@@ -32,7 +32,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=url,
-    packages=["plex_import"],
+    packages=["plex_importer"],
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
