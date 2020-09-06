@@ -34,6 +34,9 @@ setuptools.setup(
     url=url,
     packages=["plex_importer"],
     python_requires='>=3.6',
+    install_requires=[
+        "plexapi",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
