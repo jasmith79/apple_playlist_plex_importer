@@ -15,7 +15,7 @@ Additionally, some steps while not strictly required will make it work much more
 
 ## Installing
 
-You can clone this repository and run app.py in the importer package but I recommend installing through pip:
+You can clone this repository, install the plexapi package dependency, and run app.py in the importer package but I recommend installing through pip:
 
 ```
 python3 -m pip install --user git+https://github.com/jasmith79/apple_playlist_plex_importer.git
