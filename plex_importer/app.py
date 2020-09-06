@@ -112,7 +112,7 @@ def main():
     print("Retrieving Music Section...")
     plex_music = get_plex_music(plex_server)
     print("Reading xml file...")
-    appl_xml = read_apple_xml("./Library-clean.xml")
+    appl_xml = read_apple_xml(args.apple_xml)
     appl_playlists = extract_apple_playlists(appl_xml)
     print("Getting tracks...")
     plex_tracks = list(plex_music.searchTracks())
