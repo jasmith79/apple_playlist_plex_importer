@@ -1,6 +1,6 @@
 # apple_playlist_plex_importer
 
-Imports Apple Playlists into Plex Media Server. Note that this is an imperfect process. It *should* work on older iTunes XML files, but I haven't tested it (only on Catalina). It *should* work on XML files created by the Windows version of iTunes, but again, haven't tested it. It *should* work on just about any host OS for PMS, but I've only tested on a Synology NAS (i.e. Linux).
+Imports Apple Playlists into Plex Media Server. Note that this is an imperfect process. It *should* work on older iTunes XML files, but I've only tested it on Catalina (latest Music), Mojave (latest iTunes), and Windows 10 (latest iTunes). It *should* work on just about any host OS for PMS, but I've only tested on a Synology NAS (i.e. Linux).
 
 To work at all a few things are required:
 
