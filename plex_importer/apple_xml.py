@@ -30,7 +30,11 @@ def extract_apple_playlists(xml_plist: Dict) -> Iterable[Tuple[str, Iterable[Dic
     for playlist in xml_playlists:
         keys = playlist.keys()
         if "Master" not in keys and "Distinguished Kind" not in keys:
-            playlists.append(
-                (playlist["Name"], playlist["Playlist Items"]))
+            # Check if the list is empty
+            if playlist.get("Playlist Items"):
+                playlists.append((
+                    playlist["Name"],
+                    playlist["Playlist Items"],
+                ))
 
     return playlists
