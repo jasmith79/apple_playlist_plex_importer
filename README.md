@@ -4,7 +4,7 @@ Imports Apple Playlists into Plex Media Server. Note that this is an imperfect p
 
 To work at all a few things are required:
 
-1. An Apple music library XML file (File -> Library -> Export library in the Music app).
+1. An Apple music library XML file (File -> Library -> Export library in the Music app or iTunes).
 2. Credentials for your Plex Account (your plex.tv account, NOT your account on the server).
 3. The name of your Plex Server.
 
