@@ -95,8 +95,9 @@ def main():
     appl_xml = read_apple_xml(args.apple_xml)
     appl_playlists = extract_apple_playlists(appl_xml)
     if args.limit:
+        filter_list = args.limit.split(",")
         appl_playlists = [
-            x for x in appl_playlists if x[0] == args.limit
+            x for x in appl_playlists if x[0] in filter_list
         ]
         assert appl_playlists, "No playlists matched filter '{}'".format(args.limit)
 

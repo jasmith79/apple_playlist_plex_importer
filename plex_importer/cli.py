@@ -32,7 +32,9 @@ def parse_args(args: Iterable[str] = argv[1:]) -> Namespace:
 
     parser.add_argument(
         "--limit",
-        help="Will limit playlist processing to the list matching the name passed to --limit.",
+        help="""Will limit playlist processing to the lists matching 
+        the comma-delimited list of playlist names passed to --limit.
+        """,
         required=False,
     )
 
