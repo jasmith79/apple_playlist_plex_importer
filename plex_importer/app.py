@@ -1,16 +1,17 @@
-from argparse import ArgumentParser
 from datetime import datetime
 from getpass import getpass
-from sys import argv
 from typing import Dict, Iterable
 
 from plexapi.audio import Track
+from tqdm import tqdm
 
-from plex_importer.apple_xml import read_apple_xml, extract_apple_playlists
-from plex_importer.plex import get_plex_music, get_plex_server, search_plex_tracks
+from apple_xml import read_apple_xml, extract_apple_playlists
+from plex import get_plex_music, get_plex_server, search_plex_tracks
+from cli import parse_args
 
 START = datetime.now()
 PLEX_TRACK_CACHE = {}
+DEBUG = []
 
 
 def process_apple_list(
@@ -50,11 +51,12 @@ def process_apple_list(
                     PLEX_TRACK_CACHE[apple_track_id] = results[0]
                     playlist_tracks.append(results[0])
                 else:
-                    print("Multiple matches for {}/{}/{}".format(
-                        artist,
-                        apple_album,
-                        track_name,
-                    ))
+                    if DEBUG:
+                        print("Multiple matches for {}/{}/{}".format(
+                            artist,
+                            apple_album,
+                            track_name,
+                        ))
                     playlist_tracks.append(results[0])
 
             elif partials:
@@ -77,41 +79,13 @@ def process_apple_list(
 def main():
     """Main fn."""
 
-    parser = ArgumentParser()
-    parser.add_argument(
-        "apple_xml",
-        help="Path to the apple xml file.",
-    )
-
-    parser.add_argument(
-        "--user",
-        help="User name for the plex account.",
-        required=False,
-    )
-
-    parser.add_argument(
-        "--password",
-        help="Password for the plex account.",
-        required=False,
-    )
-
-    parser.add_argument(
-        "--server",
-        help="The name of the plex server to create lists on.",
-        required=False,
-    )
-
-    parser.add_argument(
-        "--limit",
-        help="Will limit playlist processing to the list matching the name passed to --limit.",
-        required=False,
-    )
-
     print("Gathering prerequisites...")
-    args = parser.parse_args(argv[1:])
+    args = parse_args()
     user = args.user or input("Please enter your plex account username:")
     password = args.password or getpass("Please enter your plex account password:")
     server = args.server or input("Please enter your plex server name:")
+    if args.debug:
+        DEBUG.append(True)
 
     print("Connecting...")
     plex_server = get_plex_server(user, password, server)
@@ -124,17 +98,23 @@ def main():
         appl_playlists = [
             x for x in appl_playlists if x[0] == args.limit
         ]
+        assert appl_playlists, "No playlists matched filter '{}'".format(args.limit)
 
     print("Getting tracks...")
     plex_tracks = list(plex_music.searchTracks())
-    for list_name, list_items in appl_playlists:
+    pbar = tqdm(appl_playlists)
+
+    # Debug printing will mess up the progress bar, turn it off if debugging.
+    if DEBUG:
+        pbar = appl_playlists
+    for list_name, list_items in pbar:
+        pbar.set_description("Processing list {}".format(list_name).ljust(35))
         apple_tracks = [
             appl_xml["Tracks"][str(item["Track ID"])] for item in list_items
         ]
         results = process_apple_list(apple_tracks, plex_tracks)
-        print("Have results, creating list {} on server".format(list_name))
+        pbar.set_description("Have results, creating list {} on server".format(list_name))
         plex_server.createPlaylist(list_name, results)
-        print("done.")
 
     print("Done. Created {} playlists on {} in {} seconds.".format(
         str(len(appl_playlists)),
