@@ -101,6 +101,12 @@ def main():
         required=False,
     )
 
+    parser.add_argument(
+        "--limit",
+        help="Will limit playlist processing to the list matching the name passed to --limit.",
+        required=False,
+    )
+
     print("Gathering prerequisites...")
     args = parser.parse_args(argv[1:])
     user = args.user or input("Please enter your plex account username:")
@@ -114,6 +120,11 @@ def main():
     print("Reading xml file...")
     appl_xml = read_apple_xml(args.apple_xml)
     appl_playlists = extract_apple_playlists(appl_xml)
+    if args.limit:
+        appl_playlists = [
+            x for x in appl_playlists if x[0] == args.limit
+        ]
+
     print("Getting tracks...")
     plex_tracks = list(plex_music.searchTracks())
     for list_name, list_items in appl_playlists:
