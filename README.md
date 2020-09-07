@@ -29,7 +29,7 @@ Open up a terminal and (assuming you installed via pip) run the command:
 pleximport path/to/library.xml --user myplexuser --password myplexpassword --server myplexserver
 ```
 
-For those of you worried about having passwords in your shell history, you can omit anything except the file path and it will interactively prompt you for them. See `--help` as well.
+For those of you worried about having passwords in your shell history, you can omit anything except the file path and it will interactively prompt you for them. If you only want to run it against a specific playlist you can use the `--limit` flag. See `--help` as well.
 
 ## Known Issues:
 
