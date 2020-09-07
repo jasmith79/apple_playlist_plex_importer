@@ -66,12 +66,14 @@ def process_apple_list(
             elif name_only:
                 pass
 
-            else:
+            elif DEBUG:
                 print("Cannot find even a name match for {}/{}/{}, skipping".format(
                     artist,
                     apple_album,
                     track_name,
                 ))
+            else:
+                pass
 
     return playlist_tracks
 
@@ -108,6 +110,7 @@ def main():
     # Debug printing will mess up the progress bar, turn it off if debugging.
     if DEBUG:
         pbar = appl_playlists
+
     for list_name, list_items in pbar:
         pbar.set_description("Processing list {}".format(list_name).ljust(35))
         apple_tracks = [
