@@ -5,9 +5,9 @@ from typing import Dict, Iterable
 from plexapi.audio import Track
 from tqdm import tqdm
 
-from apple_xml import read_apple_xml, extract_apple_playlists
-from plex import get_plex_music, get_plex_server, search_plex_tracks
-from cli import parse_args
+from plex_importer.apple_xml import read_apple_xml, extract_apple_playlists
+from plex_importer.plex import get_plex_music, get_plex_server, search_plex_tracks
+from plex_importer.cli import parse_args
 
 START = datetime.now()
 PLEX_TRACK_CACHE = {}
