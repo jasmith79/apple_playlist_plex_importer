@@ -118,14 +118,12 @@ def main():
         ]
         results = process_apple_list(apple_tracks, plex_tracks)
         pbar.set_description("Have results, creating list {} on server".format(list_name))
-        try:
+        if results:
             plex_server.createPlaylist(list_name, results)
-        except IndexError: # Empty list? plexapi throws this.
-            if DEBUG:
-                print("Unable to create playlist {}, empty? {}".format(
-                    list_name,
-                    str(bool(list_items)),
-                ))
+        elif DEBUG:
+            print("Cannot create empty playlist {}.".format(list_name))
+        else:
+            pass
 
     print("Done. Created {} playlists on {} in {} seconds.".format(
         str(len(appl_playlists)),
