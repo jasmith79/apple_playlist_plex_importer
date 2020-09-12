@@ -36,4 +36,4 @@ For those of you worried about having passwords in your shell history, you can o
 1. It can take a significant amount of time for PMS to optimize all of those playlists. Don't be too concerned if you try to access them right away and get some sort of "failed to load" error message.
 2. If you don't have any existing music playlists you will have to reload the page/restart the client app to get the playlists menu option to show in the Plex client.
 3. As I said the name matching is not perfect and was *shockingly* difficult to implement with even decent reliability. Probably the reason the Plex team didn't do it.
-4. Playlist items will always fail to load if you try to view the playlist in either the web or desktop clients. I would *really* love some help fixing this.
+4. Playlist items will always fail to load for me the first week or so even though the playlist plays just fine. One of the weekly background tasks seems to fix this.
