@@ -92,7 +92,7 @@ def main():
     print("Connecting...")
     plex_server = get_plex_server(user, password, server)
     print("Retrieving Music Section...")
-    plex_music = get_plex_music(plex_server)
+    plex_music = get_plex_music(plex_server, args.section)
     print("Reading xml file...")
     appl_xml = read_apple_xml(args.apple_xml)
     appl_playlists = extract_apple_playlists(appl_xml)

@@ -28,14 +28,14 @@ def get_plex_server(username: str, password: str, server_name: str) -> PlexServe
     return plex_server
 
 
-def get_plex_music(plex_server: PlexServer) -> MusicSection:
+def get_plex_music(plex_server: PlexServer, section: str = "Music") -> MusicSection:
     """Retrieves a view on the music database on the specified plex server.
 
         :param plex_server: An Object representing the PMS.
         :returns: An Object representing the Music library section.
     """
 
-    plex_music = plex_server.library.section("Music")
+    plex_music = plex_server.library.section(section)
     return plex_music
 
 

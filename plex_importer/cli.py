@@ -31,6 +31,7 @@ def parse_args(args: Iterable[str] = argv[1:]) -> Namespace:
     )
 
     parser.add_argument(
+        "-L",
         "--limit",
         help="""Will limit playlist processing to the lists matching 
         the comma-delimited list of playlist names passed to --limit.
@@ -42,6 +43,14 @@ def parse_args(args: Iterable[str] = argv[1:]) -> Namespace:
         "--debug",
         help="Debug output, turns off progress bar.",
         required=False,
+    )
+
+    parser.add_argument(
+        "-s",
+        "--section",
+        help="Name of the library section to read, defaults to 'Music'.",
+        required=False,
+        default="Music",
     )
 
     return parser.parse_args(args)
